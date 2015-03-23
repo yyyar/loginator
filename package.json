@@ -1,0 +1,39 @@
+{
+  "name": "ilog",
+  "version": "0.0.1",
+  "description": "Simpe logger for Node",
+  "author": {
+    "name": "Yaroslav Pogrebnyak",
+    "url": "http://pogrebnyak.info",
+    "email": "yyyaroslav@gmail.com"
+  },
+  "homepage": "http://github.com/yyyar/ilog",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:yyyar/ilog.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yyyar/ilog/issues"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">= 0.10.12"
+  },
+  "keywords": [
+    "log",
+    "logger",
+    "logging",
+    "syslog"
+  ],
+  "scripts": {
+    "test": "nodeunit tests --reporter verbose"
+  },
+  "main": "./lib/index.js",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "dateformat": "^1.0.11",
+    "lodash": "^3.5.0",
+    "redis": "^0.12.1"
+  },
+  "devDependencies": {}
+}
