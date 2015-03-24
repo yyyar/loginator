@@ -16,21 +16,11 @@ module.exports = {
 
         var log = ilog.createLogger('simple', {
             'level': 'DEBUG',
-            'format': 'text',
-            'pattern': '%dtime [%level] [%process] (%name) : %message',
-            'appenders': [
-                ilog.createAppender('stdout')
-                //ilog.createAppender('redis', {
-                //    port: 6379,
-                //    host: 'localhost',
-                //    namespace: 'mycompany',
-                //    source: 'server1'
-                //})
-            ]
+            'formatter': new (require('../lib/formatters/json'))()
         });
 
 
-        log.info('hello', {"key":new Date()});
+        log.info('hello', new Error('some err'), {"myDate":new Date()});
         test.done();
 
     }
