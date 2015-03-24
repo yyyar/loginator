@@ -23,6 +23,11 @@ module.exports = {
             }),
             appenders: [
                 ilog.createAppender('stdout', {}),
+                /*
+                ilog.createAppender('redis', {
+                    formatter: ilog.createFormatter('json')
+                }),
+                */
                 ilog.createAppender('stdout', {
                     formatter: ilog.createFormatter('json', {
                         fields: ['message', 'dtime'],
@@ -33,8 +38,10 @@ module.exports = {
         });
 
 
-        log.info('hello', new Error('some err'), {"myDate":new Date()});
-        test.done();
+        setTimeout(function() {
+            log.info('hello', new Error('some err'), {"myDate":new Date()});
+            test.done();
+        }, 500);
 
     }
 }
