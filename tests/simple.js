@@ -15,8 +15,21 @@ module.exports = {
     simple: function(test) {
 
         var log = ilog.createLogger('simple', {
-            'level': 'DEBUG',
-            'formatter': new (require('../lib/formatters/json'))()
+            level: 'DEBUG',
+
+            // default formatter
+            formatter: ilog.createFormatter('text', {
+                pattern: '[%level] %dtime ~ %message'
+            }),
+            appenders: [
+                ilog.createAppender('stdout', {}),
+                ilog.createAppender('stdout', {
+                    formatter: ilog.createFormatter('json', {
+                        fields: ['message', 'dtime'],
+                        pretty: true
+                    })
+                })
+            ]
         });
 
 
