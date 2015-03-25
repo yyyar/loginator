@@ -14,38 +14,48 @@ module.exports = {
      */
     simple: function(test) {
 
-        var log = ilog.createLogger('simple', {
+        var log = ilog.createLogger({
+
+            name: 'mylogger',
 
             // default logging level
             level: 'DEBUG',
 
             // default formatter
-            formatter: ilog.createFormatter('text', {
-                pattern: '[%level] %dtime ~ %message'
-            }),
+            formatter: {
+                type: 'text',
+                options: {
+                    pattern: '[%level] %dtime ~ %message'
+                }
+            },
 
             // appenders
             appenders: [
+
                 // uses default formetter
-                ilog.createAppender('stdout', {}),
-                /*
-                ilog.createAppender('redis', {
-                    formatter: ilog.createFormatter('json')
-                }),
-                */
-                // overrides formatter
-                ilog.createAppender('stdout', {
-                    formatter: ilog.createFormatter('json', {
-                        fields: ['message', 'dtime'],
-                        pretty: true
-                    })
-                })
+                {
+                    type: 'stdout'
+                },
+
+                // overrides default formatter
+                {
+                    type: 'stdout',
+                    options: {
+                        formatter: {
+                            type: 'json',
+                            options: {
+                                fields: ['message', 'dtime'],
+                                pretty: true
+                            }
+                        }
+                    }
+                }
             ]
         });
 
 
         setTimeout(function() {
-            log.info('hello', new Error('some err'), {"myDate":new Date()});
+            log.info('hello', new Error('some err'), {'some object': new Date()});
             test.done();
         }, 500);
 
