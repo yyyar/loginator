@@ -2,7 +2,7 @@
  * simple.js - simple test
  */
 
-var ilog = require('../lib/logger');
+var loginator = require('../lib/logger');
 
 
 /* module exports */
@@ -14,7 +14,7 @@ module.exports = {
      */
     simple: function(test) {
 
-        var log = ilog.createLogger({
+        var log = loginator.createLogger({
 
             name: 'mylogger',
 

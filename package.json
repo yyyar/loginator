@@ -1,5 +1,5 @@
 {
-  "name": "ilog",
+  "name": "loginator",
   "version": "0.0.1",
   "description": "Simpe logger for Node",
   "author": {
@@ -7,13 +7,13 @@
     "url": "http://pogrebnyak.info",
     "email": "yyyaroslav@gmail.com"
   },
-  "homepage": "http://github.com/yyyar/ilog",
+  "homepage": "http://github.com/yyyar/loginator",
   "repository": {
     "type": "git",
-    "url": "git@github.com:yyyar/ilog.git"
+    "url": "git@github.com:yyyar/loginator.git"
   },
   "bugs": {
-    "url": "https://github.com/yyyar/ilog/issues"
+    "url": "https://github.com/yyyar/loginator/issues"
   },
   "license": "MIT",
   "engines": {

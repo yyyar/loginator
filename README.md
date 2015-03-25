@@ -1,8 +1,8 @@
-## ilog
+## loginator
 
-[![Build Status](https://travis-ci.org/yyyar/ilog.svg?branch=master)](https://travis-ci.org/yyyar/ilog) [![NPM version](https://badge.fury.io/js/ilog.svg)](http://badge.fury.io/js/ilog)
+[![Build Status](https://travis-ci.org/yyyar/loginator.svg?branch=master)](https://travis-ci.org/yyyar/loginator) [![NPM version](https://badge.fury.io/js/loginator.svg)](http://badge.fury.io/js/loginator)
 
-ilog is very simple and configurable ready logger for Node.
+loginator is very simple and configurable ready logger for Node.
 
 * **Simple**: Start using in seconds
 * **Configurable**: Configure logging format, level, etc
@@ -10,7 +10,7 @@ ilog is very simple and configurable ready logger for Node.
 
 ### Installation
 ```bash
-$ npm install ilog
+$ npm install loginator
 ```
 
 ### Usage
