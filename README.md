@@ -115,7 +115,6 @@ Where 'pattern' may be any mix of variables prefixed by '%'.
 Where 'fields' is an array of variables to include to resulting json.
 And 'pretty' is indicator that you want pretty-printed multi-line json
 
-```
 
 ##### Custom Formatters
 Feature will be added soon.
