@@ -2,9 +2,8 @@
 
 [![Build Status](https://travis-ci.org/yyyar/loginator.svg?branch=master)](https://travis-ci.org/yyyar/loginator) [![NPM version](https://badge.fury.io/js/loginator.svg)](http://badge.fury.io/js/loginator)
 
-loginator is very simple and configurable ready logger for Node.js.
+Loginator is simple and configurable logger for Node.js.
 
-* **Simple**: Start using in seconds
 * **Configurable**: Configure logging format, level, etc
 * **Formatters**: Build-in configurable text and json formatters
 * **Appenders**: Built-in stdout, file & redis appenders
@@ -32,8 +31,17 @@ log.fatal('Hello world!');
 
 // Logging objects
 log.info('Hello world!', {'some': 'object'}, new Date(), new Error('Error!!!'));
-
 ```
+Outputs:
+```
+2015-03-28 11:54:31 [DEBUG] [node] (default) : Hello world!
+2015-03-28 11:54:31 [INFO ] [node] (default) : Hello world!
+2015-03-28 11:54:31 [WARN ] [node] (default) : Hello world!
+2015-03-28 11:54:31 [ERROR] [node] (default) : Hello world!
+2015-03-28 11:54:31 [FATAL] [node] (default) : Hello world!
+2015-03-28 11:54:31 [INFO ] [node] (default) : Hello world! {"some":"object"} "2015-03-28T09:54:31.096Z" Error: Error!!!
+```
+
 
 #### Configuration
 loginator.createLogger accepts optional configuration object.
