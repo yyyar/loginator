@@ -4,9 +4,9 @@
 
 Loginator is simple and configurable logger for Node.js.
 
-* **Configurable**: Configure logging format, level, etc
-* **Formatters**: Build-in configurable text and json formatters
-* **Appenders**: Built-in stdout, file & redis appenders
+* **Configurable**: Logging format, level, multiple appenders, formatters and overrides
+* **Formatters**: Configurable Text and JSON formatters
+* **Appenders**: Configurable Stdout, File & Redis appenders
 
 ### Installation
 ```bash
@@ -20,7 +20,7 @@ $ npm install loginator
 ```javascript
 var loginator = require('loginator');
 
-var log = loginator.createLogger( /* {configuration} */ );
+var log = loginator.createLogger( /* {optional configuration} */ );
 
 // Logging levels
 log.debug('Hello world!');
@@ -44,10 +44,8 @@ Outputs:
 
 
 #### Configuration
-loginator.createLogger accepts optional configuration object.
-Note. Loginator configuration object may be a simple JSON so you can easily
-store logger configuration in external JSON file.
-Here listed all possible configuration values:
+`loginator.createLogger()` accepts one optional configuration object.
+*Note*. Loginator configuration object may be a simple JSON so you can easily store logger configuration in external JSON file.
 
 ```javascript
 var log = loginator.createLogger({
@@ -81,7 +79,7 @@ var log = loginator.createLogger({
         {
             type: 'stdout',
             options: {
-                formatter: { /* ... */ }
+                formatter: { /* ... */ } # optional formatter override
             }
         }
     ]
@@ -95,7 +93,9 @@ Formatter defines how log output will be formated. Formatter can be configured:
 overwrite formatter for concrete appender (see Appenders section for more details).
 
 There are several predefined variables that can be used in formatters config:
-```message, date, dtime, time, level, process, name```
+```
+message, date, dtime, time, level, process, name
+```
 
 ##### Text Formatter
 ```javascript
@@ -107,7 +107,7 @@ There are several predefined variables that can be used in formatters config:
 }
 ```
 
-Where 'pattern' may be any mix of variables prefixed by '%'.
+Where `pattern` may be any mix of variables prefixed by `%`.
 
 ##### JSON Formatter
 ```javascript
@@ -121,7 +121,7 @@ Where 'pattern' may be any mix of variables prefixed by '%'.
 ```
 
 Where `fields` is an array of variables to include to resulting json.
-And 'pretty' is indicator that you want pretty-printed multi-line json
+And `pretty` is indicator that you want pretty-printed multi-line json
 
 
 ##### Custom Formatters
@@ -137,7 +137,7 @@ You can pass formatter to any appender options to override logger-level formatte
 {
     type: '<type>',
     options: {
-        formatter: { /* ... */ }
+        formatter: { /* ... */ } // optional
     }
 }
 ```
@@ -146,7 +146,9 @@ You can pass formatter to any appender options to override logger-level formatte
 ```javascript
 {
     type: 'stdout',
-    options: {}
+    options: {
+        formatter: { /* ... */ } // optional
+    }
 }
 ```
 
@@ -156,19 +158,28 @@ You can pass formatter to any appender options to override logger-level formatte
     type: 'file',
     options: {
         path: '/tmp/out.log'
+        formatter: { /* ... */ } // optional
     }
 }
 ```
-Where `path` is path log output file.
+Where `path` is path to log output file.
 
 ##### Redis Appender
+When using Redis Appenders messages would be PUBLISHed to `loginator:<namespace>` channel.
+
 ```javascript
 {
     type: 'redis',
     options: {
+
+        // redis client configuration
         host: 'localhost',
         port: 6379,
-        options: {}
+        options: {},
+
+        // other
+        namespace: 'default',
+        formatter: { /* ... */ } // optional
     }
 }
 ```
@@ -178,6 +189,8 @@ Where `host`, `port` and `options` are redis configuration params.
 ##### Custom Appenders
 Feature will be added soon.
 
+#### Examples
+See `tests` directory for examples.
 
 #### Tests
 ```bash
