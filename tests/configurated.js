@@ -54,10 +54,8 @@ module.exports = {
         });
 
 
-        setTimeout(function() {
-            log.info('hello', new Error('some err'), {'some object': new Date()});
-            test.done();
-        }, 500);
+        log.info('hello', new Error('some err'), {'some object': new Date()});
+        test.done();
 
     }
 }

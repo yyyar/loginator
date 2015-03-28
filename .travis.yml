@@ -7,3 +7,5 @@ node_js:
 before_script:
     - "npm install nodeunit -g"
 
+services:
+    - redis-server

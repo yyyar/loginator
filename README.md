@@ -89,7 +89,7 @@ overwrite formatter for concrete appender (see Appenders section for more detail
 There are several predefined variables that can be used in formatters config:
 ```message, date, dtime, time, level, process, name```
 
-##### text formatter
+##### Text Formatter
 ```javascript
 {
     type: 'text',
@@ -101,7 +101,7 @@ There are several predefined variables that can be used in formatters config:
 
 Where 'pattern' may be any mix of variables prefixed by '%'.
 
-##### json formatter
+##### JSON Formatter
 ```javascript
 {
     type: 'json',
@@ -112,7 +112,7 @@ Where 'pattern' may be any mix of variables prefixed by '%'.
 }
 ```
 
-Where 'fields' is an array of variables to include to resulting json.
+Where `fields` is an array of variables to include to resulting json.
 And 'pretty' is indicator that you want pretty-printed multi-line json
 
 
@@ -123,7 +123,7 @@ Feature will be added soon.
 #### Appenders
 Appender is a destination of where log output will go.
 
-##### Appender Formatter
+##### Appender Formatter Override
 You can pass formatter to any appender options to override logger-level formatter:
 ```javascript
 {
@@ -134,7 +134,7 @@ You can pass formatter to any appender options to override logger-level formatte
 }
 ```
 
-##### stdout appender
+##### Stdout Appender
 ```javascript
 {
     type: 'stdout',
@@ -142,11 +142,30 @@ You can pass formatter to any appender options to override logger-level formatte
 }
 ```
 
-##### file appender
-Will come soon
+##### File Appender
+```javascript
+{
+    type: 'file',
+    options: {
+        path: '/tmp/out.log'
+    }
+}
+```
+Where `path` is path log output file.
 
-##### redis appender
-Will come soon
+##### Redis Appender
+```javascript
+{
+    type: 'redis',
+    options: {
+        host: 'localhost',
+        port: 6379,
+        options: {}
+    }
+}
+```
+Where `host`, `port` and `options` are redis configuration params.
+
 
 ##### Custom Appenders
 Feature will be added soon.
