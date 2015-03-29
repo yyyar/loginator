@@ -7,6 +7,7 @@ Loginator is simple and configurable logger for Node.js.
 * **Configurable**: Logging format, level, multiple appenders, formatters and overrides
 * **Formatters**: Configurable Text and JSON formatters
 * **Appenders**: Configurable Stdout, File & Redis appenders
+* **Custom Vars**: Inherit bound loggers overriding custom variables
 
 ### Installation
 ```bash
