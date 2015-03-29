@@ -189,6 +189,44 @@ Where `host`, `port` and `options` are redis configuration params.
 ##### Custom Appenders
 Feature will be added soon.
 
+#### Custom Variables & Bound Loggers
+Bound logger is logger that inherits all base logger instence properties and 
+overrides custom variables.
+
+```javascript
+var log = loginator.createLogger({
+    customVars: {
+        'myVar': 'nothing'
+    },
+    formatter: {
+        type: 'text',
+        options: {
+            pattern: '%dtime (%myVar): %message'
+        }
+    }
+});
+
+var boundLog = log.bind({
+    'myVar': 'MY1'
+});
+
+var boundLog2 = log.bind({
+    'myVar': 'MY2'
+});
+
+log.info('Not bound');
+boundLog.info('Bound 1');
+boundLog2.info('Bound 2');
+```
+
+Outputs:
+```
+2015-03-29 05:41:50 (nothing): Not bound
+2015-03-29 05:41:50 (MY1): Bound 1
+2015-03-29 05:41:50 (MY2): Bound 2
+```
+
+
 #### Examples
 See `tests` directory for examples.
 
