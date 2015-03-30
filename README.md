@@ -83,7 +83,7 @@ var log = loginator.createLogger({
         {
             type: 'stdout',
             options: {
-                formatter: { /* ... */ } # optional formatter override
+                formatter: { /* ... */ } // optional formatter override
             }
         }
     ]
