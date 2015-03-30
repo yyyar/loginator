@@ -23,26 +23,29 @@ var loginator = require('loginator');
 
 var log = loginator.createLogger( /* {optional configuration} */ );
 
-// Logging levels
+/* Logging levels example */
+
 log.debug('Hello world!');
+// -> 2015-03-28 11:54:31 [DEBUG] [node] (default) : Hello world!
+
 log.info('Hello world!');
+// -> 2015-03-28 11:54:31 [INFO ] [node] (default) : Hello world!
+
 log.warn('Hello world!');
+// -> 2015-03-28 11:54:31 [WARN ] [node] (default) : Hello world!
+
 log.error('Hello world!');
+// -> 2015-03-28 11:54:31 [ERROR] [node] (default) : Hello world!
+
 log.fatal('Hello world!');
+// -> 2015-03-28 11:54:31 [FATAL] [node] (default) : Hello world!
 
-// Logging objects
+
+/* Logging objects */
+
 log.info('Hello world!', {'some': 'object'}, new Date(), new Error('Error!!!'));
+// -> 2015-03-28 11:54:31 [INFO ] [node] (default) : Hello world! {"some":"object"} "2015-03-28T09:54:31.096Z" Error: Error!!!
 ```
-Outputs:
-```
-2015-03-28 11:54:31 [DEBUG] [node] (default) : Hello world!
-2015-03-28 11:54:31 [INFO ] [node] (default) : Hello world!
-2015-03-28 11:54:31 [WARN ] [node] (default) : Hello world!
-2015-03-28 11:54:31 [ERROR] [node] (default) : Hello world!
-2015-03-28 11:54:31 [FATAL] [node] (default) : Hello world!
-2015-03-28 11:54:31 [INFO ] [node] (default) : Hello world! {"some":"object"} "2015-03-28T09:54:31.096Z" Error: Error!!!
-```
-
 
 #### Configuration
 `loginator.createLogger()` accepts one optional configuration object.
@@ -216,17 +219,49 @@ var boundLog2 = log.bind({
 });
 
 log.info('Not bound');
+// -> 2015-03-29 05:41:50 (nothing): Not bound
+
 boundLog.info('Bound 1');
+// -> 2015-03-29 05:41:50 (MY1): Bound 1
+
 boundLog2.info('Bound 2');
+// -> 2015-03-29 05:41:50 (MY2): Bound 2
+
 ```
 
-Outputs:
-```
-2015-03-29 05:41:50 (nothing): Not bound
-2015-03-29 05:41:50 (MY1): Bound 1
-2015-03-29 05:41:50 (MY2): Bound 2
-```
+#### Reusing Appenders
+For example, you want to create several logs sharing the same appender (this is common in case 
+of file), not forcing to open stream (for file appenders) or connection (for redis appenders) several times.
+In this can you can create appender and then reuse it in several loggers. In this case you'll pass
+appender instance insteof of configuration object to `logger.appenders` array.
 
+```javascript
+var loginator = require('loginator');
+
+var stdoutAppender = loginator.createAppender({
+    type: 'stdout'
+});
+
+var log = loginator.createLogger({
+    name: 'log',
+    appenders: [
+        stdoutAppender
+    ]
+});
+
+var log2 = loginator.createLogger({
+    name: 'log2',
+    appenders: [
+        stdoutAppender
+    ]
+});
+
+log.debug('Hello world!');
+// -> 2015-03-30 03:48:49 [DEBUG] [node] (log) : Hello world!
+
+log2.debug('Bye world!');
+// -> 2015-03-30 03:48:49 [DEBUG] [node] (log2) : Bye world!
+```
 
 #### Examples
 See `tests` directory for examples.
