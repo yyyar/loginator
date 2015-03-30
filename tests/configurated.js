@@ -25,7 +25,7 @@ module.exports = {
             formatter: {
                 type: 'text',
                 options: {
-                    pattern: '[%level] %dtime ~ %message'
+                    pattern: '[%level] %dtime (%name) (%location) ~ %message'
                 }
             },
 

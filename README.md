@@ -72,7 +72,7 @@ var log = loginator.createLogger({
     formatter: {
         type: 'text',
         options: {
-            pattern: '[%level] %dtime ~ %message'
+            pattern: '[%level] %dtime (%name) (%location) ~ %message'
         }
     },
 
@@ -98,7 +98,15 @@ overwrite formatter for concrete appender (see Appenders section for more detail
 
 There are several predefined variables that can be used in formatters config:
 ```
-message, date, dtime, time, level, process, name
+message       -  logging message (joined arguments)
+date          -  date only
+dtime         -  date with time
+time          -  time only
+level         -  logging level
+process       -  process name
+name          -  logger name
+location      -  location (filename:line) of log call
+longlocation  -  long location (/full/path/to/filename:line) of log call
 ```
 
 ##### Text Formatter
