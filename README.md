@@ -169,12 +169,15 @@ You can pass formatter to any appender options to override logger-level formatte
 {
     type: 'file',
     options: {
-        path: '/tmp/out.log'
+        path: '/tmp/out.log',
+        shareStream: true, // optional
         formatter: { /* ... */ } // optional
     }
 }
 ```
-Where `path` is path to log output file.
+Where `path (string)` is path to log output file,
+and `shareStream (bool)` indicates that appenders should reuse the same stream to file if exists
+instead of opening file.
 
 ##### Redis Appender
 When using Redis Appenders messages would be PUBLISHed to `loginator:<namespace>` channel.

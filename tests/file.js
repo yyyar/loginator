@@ -18,12 +18,24 @@ module.exports = {
             appenders: [{
                 type: 'file',
                 options: {
-                    path: __dirname + '/output/log.log'
+                    path: __dirname + '/output/log.log',
+                    shareStream: true
+                }
+            }]
+        }),
+        log2 = loginator.createLogger({
+            appenders: [{
+                type: 'file',
+                options: {
+                    path: __dirname + '/output/log.log',
+                    shareStream: true
                 }
             }]
         });
 
+
         log.info('Hello world!');
+        log2.info('Hello world2!');
 
         test.done();
 
