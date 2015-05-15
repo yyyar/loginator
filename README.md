@@ -21,7 +21,11 @@ $ npm install loginator
 ```javascript
 var loginator = require('loginator');
 
+// create new logger
 var log = loginator.createLogger( /* {optional configuration} */ );
+
+// or get logger, and cache it for future calls
+// var log = loginator.getLogger('mylogger' /* , {optional configuration } */);
 
 /* Logging levels example */
 
@@ -89,6 +93,17 @@ var log = loginator.createLogger({
     ]
 });
 ```
+
+#### Default configuration
+You can set default configuration:
+
+```javascript
+loginator.configure({
+    // configuration
+});
+```
+In this case configuration fields passed to `loginator.createLogger` will override default ones.
+
 
 #### Formatters
 Formatter defines how log output will be formated. Formatter can be configured:

@@ -14,7 +14,7 @@ module.exports = {
      */
     simple: function(test) {
 
-        var log = loginator.createLogger();
+        var log = loginator.getLogger('simple');
 
         log.debug('Hello world!');
         log.info('Hello world!');
