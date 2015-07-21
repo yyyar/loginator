@@ -33,4 +33,4 @@ var CustomAppender = module.exports = function(config) {
 }
 
 
-inherits(CustomAppender, (require('../../lib/appenders/_base')) );
+inherits(CustomAppender, (require('../../lib/logger').BaseAppender) );

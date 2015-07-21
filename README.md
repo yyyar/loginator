@@ -222,12 +222,14 @@ Where `host`, `port` and `options` are redis configuration params.
 You can register you custom appender and then use it in configuration in the 
 same way as build-in appenders.
 
-To do so you need to inherit you custom appender from `appenders/_base.js` first
-overriding `performWrite` and optionally `close` functions.
+To do so you need to inherit you custom appender from `loginator.BaseAppender` first
+overriding `performWrite` and (optionally) `close` functions.
 
 Checkout `tests/custom/customAppender.js` for custom appender example and
 `tests/registerAppender.js` file for it's usage.
 
+##### Custom Formatters
+Will come soon...
 
 #### Custom Variables & Bound Loggers
 Bound logger is logger that inherits all base logger instence properties and 
