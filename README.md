@@ -86,6 +86,7 @@ var log = loginator.createLogger({
     appenders: [
         {
             type: 'stdout',
+            level: 'INFO', // optional level override
             options: {
                 formatter: { /* ... */ } // optional formatter override
             }
@@ -158,11 +159,12 @@ Feature will be added soon.
 #### Appenders
 Appender is a destination of where log output will go.
 
-##### Appender Formatter Override
-You can pass formatter to any appender options to override logger-level formatter:
+##### Appender Overrides
+You can override logging level and formatter of any appender options:
 ```javascript
 {
     type: '<type>',
+    level: 'INFO', // optional, will override default logger level
     options: {
         formatter: { /* ... */ } // optional
     }
@@ -217,7 +219,15 @@ Where `host`, `port` and `options` are redis configuration params.
 
 
 ##### Custom Appenders
-Feature will be added soon.
+You can register you custom appender and then use it in configuration in the 
+same way as build-in appenders.
+
+To do so you need to inherit you custom appender from `appenders/_base.js` first
+overriding `performWrite` and optionally `close` functions.
+
+Checkout `tests/custom/customAppender.js` for custom appender example and
+`tests/registerAppender.js` file for it's usage.
+
 
 #### Custom Variables & Bound Loggers
 Bound logger is logger that inherits all base logger instence properties and 

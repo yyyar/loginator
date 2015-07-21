@@ -34,7 +34,8 @@ module.exports = {
 
                 // uses default formetter
                 {
-                    type: 'stdout'
+                    type: 'stdout',
+                    level: 'INFO'
                 },
 
                 // overrides default formatter
