@@ -217,6 +217,24 @@ When using Redis Appenders messages would be PUBLISHed to `loginator:<namespace>
 ```
 Where `host`, `port` and `options` are redis configuration params.
 
+##### Web Appender
+When using Redis Appenders messages would be send over http/https to as request body to specified URL.
+
+```javascript
+{
+    type: 'web',
+    options: {
+
+        // request configuration
+        url: 'http://some.url.com/log',
+        method: 'POST', // optional, default GET
+        headers: {},    // optional
+
+        // other
+        formatter: { /* ... */ } // optional
+    }
+}
+```
 
 ##### Custom Appenders
 You can register you custom appender and then use it in configuration in the 
