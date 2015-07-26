@@ -10,9 +10,9 @@ var loginator = require('../lib/logger');
 module.exports = {
 
     /**
-     * Redis output test
+     * Web output test
      */
-    redis: function(test) {
+    web: function(test) {
 
         var log = loginator.createLogger({
             appenders: [
