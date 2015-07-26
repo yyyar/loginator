@@ -219,6 +219,7 @@ Where `host`, `port` and `options` are redis configuration params.
 
 ##### Web Appender
 When using Redis Appenders messages would be send over http/https to as request body to specified URL.
+For an example, see `tests/web.js`.
 
 ```javascript
 {
