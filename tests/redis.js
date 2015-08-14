@@ -15,15 +15,16 @@ module.exports = {
     redis: function(test) {
 
         var log = loginator.createLogger({
-            formatter: {
-                type: 'json'
-            },
             appenders: [{
                 type: 'redis',
+                level: 'ERROR',
                 options: {
                     host: 'localhost',
                     port: 6379,
-                    options: {}
+                    namespace: '123',
+                    formatter: {
+                        type: 'json'
+                    }
                 }
             }]
         });
@@ -31,6 +32,7 @@ module.exports = {
         // Naive wait for redis appender to connect
        setTimeout(function() {
             log.info('Hello world!');
+            log.error('errr');
             test.done();
        }, 1000);
 
