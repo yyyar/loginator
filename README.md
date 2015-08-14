@@ -120,6 +120,7 @@ dtime         -  date with time
 time          -  time only
 level         -  logging level
 process       -  process name
+hostname      -  host name (from `os.hostname()`)
 name          -  logger name
 location      -  location (filename:line) of log call
 longlocation  -  long location (/full/path/to/filename:line) of log call

@@ -23,7 +23,10 @@ module.exports = {
                     port: 6379,
                     namespace: '123',
                     formatter: {
-                        type: 'json'
+                        type: 'json',
+                        options: {
+                            fields: ['message', 'dtime', 'process', 'hostname', 'name']
+                        }
                     }
                 }
             }]
