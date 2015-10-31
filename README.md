@@ -188,14 +188,14 @@ You can override logging level and formatter of any appender options:
     type: 'file',
     options: {
         path: '/tmp/out.log',
-        shareStream: true, // optional
+        rollingSize: '100kb', // max size of file before rolling
         formatter: { /* ... */ } // optional
     }
 }
 ```
 Where `path (string)` is path to log output file,
-and `shareStream (bool)` indicates that appenders should reuse the same stream to file if exists
-instead of opening file.
+and `rollingSize (string)` is a maximum output file size before it will be rolled. Unlimited by default.
+Possible units are: b, kb, mb, gb.
 
 ##### Redis Appender
 When using Redis Appenders messages would be PUBLISHed to `loginator:<namespace>` channel.

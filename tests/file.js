@@ -33,7 +33,6 @@ module.exports = {
             }]
         });
 
-
         log.info('Hello world!');
         log2.info('Hello world2!');
 
