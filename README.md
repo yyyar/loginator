@@ -144,13 +144,16 @@ Where `pattern` may be any mix of variables prefixed by `%`.
     type: 'json',
     options: {
         fields: ['dtime', 'message', 'level', 'process'],
-        pretty: true | false
+        pretty: true | false,  // default: false
+        stringifyMessage: true | false   // default: false
     }
 }
 ```
 
 Where `fields` is an array of variables to include to resulting json.
-And `pretty` is indicator that you want pretty-printed multi-line json
+`pretty` is indicator that you want pretty-printed multi-line json.
+And `stringifyMessage` means that we want stringify message array instead
+of pushing it as JSON subtree.
 
 
 ##### Custom Formatters
