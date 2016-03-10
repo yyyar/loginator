@@ -14,10 +14,10 @@ module.exports = {
      */
     redis: function(test) {
 
-        var log = loginator.createLogger({
+        var config = {
             appenders: [{
                 type: 'redis',
-                level: 'ERROR',
+                level: 'DEBUG',
                 options: {
                     host: 'localhost',
                     port: 6379,
@@ -31,12 +31,16 @@ module.exports = {
                     }
                 }
             }]
-        });
+        };
+
+        var log = loginator.getLogger('log1', config);
+        var log2 = loginator.getLogger('log2', config);
 
         // Naive wait for redis appender to connect
        setTimeout(function() {
-            log.info('Hello world!');
-            log.error('errr', {object: 'value'});
+       //setInterval(function() {
+            log.info('Hello world 1!', {object: 'value'});
+            log2.info('Hello world 2!', {object: 'value'});
             test.done();
        }, 1000);
 
