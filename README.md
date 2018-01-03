@@ -91,7 +91,11 @@ var log = loginator.createLogger({
                 formatter: { /* ... */ } // optional formatter override
             }
         }
-    ]
+    ],
+
+    // (optional) loglog - function that is called by loginator to log its own messages
+    // it may happen in case of some problem in appender and we have no other way to log it.
+    loglog: console.error
 });
 ```
 
