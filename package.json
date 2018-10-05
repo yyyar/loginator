@@ -1,6 +1,6 @@
 {
   "name": "loginator",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "description": "Simpe & configurable logger for Node.js",
   "author": {
     "name": "Yaroslav Pogrebnyak",
@@ -31,12 +31,12 @@
   "main": "./lib/logger.js",
   "readmeFilename": "README.md",
   "dependencies": {
-    "dateformat": "^1.0.11",
-    "lodash": "^3.5.0",
+    "dateformat": "^3.0.3",
+    "lodash": "^4.17.11",
     "redis": "^2.8.0",
-    "request": "^2.60.0"
+    "request": "^2.88.0"
   },
   "devDependencies": {
-    "nodeunit": "^0.11.2"
+    "nodeunit": "^0.11.3"
   }
 }
