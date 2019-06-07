@@ -7,7 +7,8 @@ var loginator = require('../lib/logger'),
         appenders: [{
             type: 'file',
             options: {
-                path: __dirname + '/output/log.log'
+                path: __dirname + '/output/log.log',
+                rollingSize: '5b',
             }
         }]
     },
@@ -59,13 +60,15 @@ module.exports = {
         var log = loginator.createLogger(file_cfg),
             log2 = loginator.createLogger(file_cfg);
 
-        log.debug('Hello world!');
-        log2.debug('Hello world logger2!');
-        log.close();
-        log2.debug('Bye world logger2!');
-        log2.close();
-        log2.debug('sdfse');
-        test.done();
+            log.debug('Hello world!');
+            log2.debug('Hello world logger2!');
+            log.close();
+            log2.debug('Bye world logger2!');
+            log2.close();
+            log2.close();
+            log2.debug('sdfse');
+
+            test.done();
     },
     redis: function (test) {
         var log = loginator.createLogger(redis_cfg),
