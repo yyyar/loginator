@@ -300,22 +300,22 @@ that not allocate memory, and just replace variable in-place:
 
 ```javascript
 
-/* once_with applies variable only for next log call */
+/* with applies variable only for next log call */
 
-log.once_with({myVar:"once with"}).info('Hello');
-// -> 2015-03-29 05:41:50 (once with): Hello
+log.with({myVar:"with"}).info('Hello');
+// -> 2015-03-29 05:41:50 (with): Hello
 
 log.info('Hello');
 // -> 2015-03-29 05:41:50 (undefined): Hello
 
 
-/* with applies variable for all further log calls */
+/* with_remember applies variable for all further log calls */
 
-log.once_with({myVar:"with"}).info('Hello');
-// -> 2015-03-29 05:41:50 (with): Hello
+log.with_remember({myVar:"with remember"}).info('Hello');
+// -> 2015-03-29 05:41:50 (with remember): Hello
 
 log.info('Hello');
-// -> 2015-03-29 05:41:50 (with): Hello
+// -> 2015-03-29 05:41:50 (with remember): Hello
 ```
 
 `once_with` and `with` override variables that were specified by `bind` function or `customVars` config property,
