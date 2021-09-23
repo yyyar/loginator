@@ -1,6 +1,6 @@
 {
   "name": "loginator",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "description": "Simpe & configurable logger for Node.js",
   "author": {
     "name": "Yaroslav Pogrebnyak",
