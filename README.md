@@ -294,6 +294,34 @@ boundLog2.info('Bound 2');
 
 ```
 
+Binding a logger trigger memory allocation and creation of new logger. This may be not convinitent in situations
+where binding is called frequently with different variables. In this case better use `once_with` and `with` functions
+that not allocate memory, and just replace variable in-place:
+
+```javascript
+
+/* once_with applies variable only for next log call */
+
+log.once_with({myVar:"once with"}).info('Hello');
+// -> 2015-03-29 05:41:50 (once with): Hello
+
+log.info('Hello');
+// -> 2015-03-29 05:41:50 (undefined): Hello
+
+
+/* with applies variable for all further log calls */
+
+log.once_with({myVar:"with"}).info('Hello');
+// -> 2015-03-29 05:41:50 (with): Hello
+
+log.info('Hello');
+// -> 2015-03-29 05:41:50 (with): Hello
+```
+
+`once_with` and `with` override variables that were specified by `bind` function or `customVars` config property,
+as well as default variables, so be careful with them.
+
+
 #### Reusing Appenders
 For example, you want to create several logs sharing the same appender (this is common in case 
 of file), not forcing to open stream (for file appenders) or connection (for redis appenders) several times.

@@ -38,6 +38,9 @@ module.exports = {
         boundLog.info('Bound 1');
         boundLog2.info('Bound 2');
 
+        log.once_with({myVar:'WITHONCE'}).info("With once");
+        log.info("After with once");
+
         test.done();
 
     }
