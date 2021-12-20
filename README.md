@@ -219,14 +219,17 @@ When using Redis Appenders messages would be PUBLISHed to `loginator:<namespace>
 
         // other
         namespace: 'default',
-        formatter: { /* ... */ } // optional
+        formatter: { /* ... */ }, // optional
+        shareConnection: false    // optional Share redis connection between namespaces (since 0.0.26)
     }
 }
 ```
 Where `host`, `port` and `options` are redis configuration params.
+`shareConnection` option enables internal cache of redis clients, so that multiple instances of
+the redis appender with the same `host` and `port` will use one redis client.
 
 ##### Web Appender
-When using Redis Appenders messages would be send over http/https to as request body to specified URL.
+When using Web appender, messages would be sent over http/https as request body to the specified URL.
 For an example, see `tests/web.js`.
 
 ```javascript
