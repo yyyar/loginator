@@ -22,7 +22,18 @@ $ npm install loginator
 var loginator = require('loginator');
 
 // create new logger
-var log = loginator.createLogger( /* {optional configuration} */ );
+var log = loginator.createLogger({
+  // Example with date format options
+  formatter: {
+    type: 'text',
+    options: {
+      pattern: '[%dtime] [%level] - %message',
+      dateFormat: 'yyyy-mm-dd',
+      timeFormat: 'HH:MM:ss',
+      dtimeFormat: 'yyyy-mm-dd HH:MM:ss'
+    }
+  }
+});
 
 // or get logger, and cache it for future calls
 // var log = loginator.getLogger('mylogger' /* , {optional configuration } */);
@@ -30,25 +41,25 @@ var log = loginator.createLogger( /* {optional configuration} */ );
 /* Logging levels example */
 
 log.debug('Hello world!');
-// -> 2015-03-28 11:54:31 [DEBUG] [node] (default) : Hello world!
+// -> [2015-03-28 11:54:31] [DEBUG] - Hello world!
 
 log.info('Hello world!');
-// -> 2015-03-28 11:54:31 [INFO ] [node] (default) : Hello world!
+// -> [2015-03-28 11:54:31] [INFO] - Hello world!
 
 log.warn('Hello world!');
-// -> 2015-03-28 11:54:31 [WARN ] [node] (default) : Hello world!
+// -> [2015-03-28 11:54:31] [WARN] - Hello world!
 
 log.error('Hello world!');
-// -> 2015-03-28 11:54:31 [ERROR] [node] (default) : Hello world!
+// -> [2015-03-28 11:54:31] [ERROR] - Hello world!
 
 log.fatal('Hello world!');
-// -> 2015-03-28 11:54:31 [FATAL] [node] (default) : Hello world!
+// -> [2015-03-28 11:54:31] [FATAL] - Hello world!
 
 
 /* Logging objects */
 
 log.info('Hello world!', {'some': 'object'}, new Date(), new Error('Error!!!'));
-// -> 2015-03-28 11:54:31 [INFO ] [node] (default) : Hello world! {"some":"object"} "2015-03-28T09:54:31.096Z" Error: Error!!!
+// -> [2015-03-28 11:54:31] [INFO] - Hello world! {"some":"object"} "2015-03-28T09:54:31.096Z" Error: Error!!!
 ```
 
 #### Configuration
@@ -76,7 +87,10 @@ var log = loginator.createLogger({
     formatter: {
         type: 'text',
         options: {
-            pattern: '[%level] %dtime (%name) (%location) ~ %message'
+            pattern: '[%level] %dtime (%name) (%location) ~ %message',
+            dateFormat: 'yyyy-mm-dd',       // optional, format for %date
+            timeFormat: 'HH:MM:ss',         // optional, format for %time
+            dtimeFormat: 'yyyy-mm-dd HH:MM:ss' // optional, format for %dtime
         }
     },
 
@@ -135,12 +149,30 @@ longlocation  -  long location (/full/path/to/filename:line) of log call
 {
     type: 'text',
     options: {
-        pattern: '[%dtime] [%level] - %message'
+        pattern: '[%dtime] [%level] - %message',
+        dateFormat: 'yyyy-mm-dd',       // optional, format for %date
+        timeFormat: 'HH:MM:ss',         // optional, format for %time
+        dtimeFormat: 'yyyy-mm-dd HH:MM:ss', // optional, format for %dtime
     }
 }
 ```
 
-Where `pattern` may be any mix of variables prefixed by `%`.
+Where `pattern` may be any mix of variables prefixed by `%`. You can customize date and time formats using `dateFormat`, `timeFormat`, and `dtimeFormat` options. These formats use the [dateformat](https://www.npmjs.com/package/dateformat) library's formatting tokens.
+
+###### Using 12-hour Time Format
+
+For 12-hour time format with AM/PM indicator, use:
+
+```javascript
+{
+    type: 'text',
+    options: {
+        pattern: '[%dtime] [%level] - %message',
+        timeFormat: 'h:MM:ss TT',        // 12-hour format with seconds and AM/PM
+        dtimeFormat: 'yyyy-mm-dd h:MM TT' // date with 12-hour time
+    }
+}
+```
 
 ##### JSON Formatter
 ```javascript
@@ -149,15 +181,19 @@ Where `pattern` may be any mix of variables prefixed by `%`.
     options: {
         fields: ['dtime', 'message', 'level', 'process'],
         pretty: true | false,  // default: false
-        stringifyMessage: true | false   // default: false
+        stringifyMessage: true | false,   // default: false
+        dateFormat: 'yyyy-mm-dd',       // optional, format for %date
+        timeFormat: 'HH:MM:ss',         // optional, format for %time
+        dtimeFormat: 'yyyy-mm-dd HH:MM:ss' // optional, format for %dtime
     }
 }
 ```
 
 Where `fields` is an array of variables to include to resulting json.
 `pretty` is indicator that you want pretty-printed multi-line json.
-And `stringifyMessage` means that we want stringify message array instead
+`stringifyMessage` means that we want stringify message array instead
 of pushing it as JSON subtree.
+Additionally, you can customize date and time formats using `dateFormat`, `timeFormat`, and `dtimeFormat` options.
 
 
 ##### Custom Formatters
@@ -249,7 +285,7 @@ For an example, see `tests/web.js`.
 ```
 
 ##### Custom Appenders
-You can register you custom appender and then use it in configuration in the 
+You can register you custom appender and then use it in configuration in the
 same way as build-in appenders.
 
 To do so you need to inherit you custom appender from `loginator.BaseAppender` first
@@ -262,7 +298,7 @@ Checkout `tests/custom/customAppender.js` for custom appender example and
 Will come soon...
 
 #### Custom Variables & Bound Loggers
-Bound logger is logger that inherits all base logger instence properties and 
+Bound logger is logger that inherits all base logger instence properties and
 overrides custom variables.
 
 ```javascript
@@ -273,7 +309,10 @@ var log = loginator.createLogger({
     formatter: {
         type: 'text',
         options: {
-            pattern: '%dtime (%myVar): %message'
+            pattern: '%dtime (%myVar): %message',
+            dateFormat: 'yyyy-mm-dd',
+            timeFormat: 'HH:MM:ss',
+            dtimeFormat: 'yyyy-mm-dd HH:MM:ss'
         }
     }
 });
@@ -298,7 +337,7 @@ boundLog2.info('Bound 2');
 ```
 
 #### Reusing Appenders
-For example, you want to create several logs sharing the same appender (this is common in case 
+For example, you want to create several logs sharing the same appender (this is common in case
 of file), not forcing to open stream (for file appenders) or connection (for redis appenders) several times.
 In this can you can create appender and then reuse it in several loggers. In this case you'll pass
 appender instance insteof of configuration object to `logger.appenders` array.
